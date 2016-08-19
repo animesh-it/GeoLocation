@@ -21,7 +21,7 @@ class EmployeeModel extends CI_Model{
 
 	function GetEmployeeInformation($fromdate, $todate)
 	{
-		return $this->opdb->query('SELECT * FROM geolog WHERE DATE(DateOfLog)>= "'.date('Y-m-d 00:00:00',strtotime($fromdate)).'" AND DATE(DateOfLog)<= "'.date('Y-m-d 23:59:59',strtotime($todate)).'" AND LogData LIKE "%action%"');
+		return $this->opdb->query('SELECT * FROM geolog WHERE DATE(DateOfLog)>= "'.date('Y-m-d 00:00:00',strtotime($fromdate)).'" AND DATE(DateOfLog)<= "'.date('Y-m-d 23:59:59',strtotime($todate)));
 	}
 }
 ?>

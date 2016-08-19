@@ -53,7 +53,15 @@
                                 <span class="title">Add User</span>
                             </a>
                         </li>
-                        
+                        <li class="heading">
+                            <h3 class="uppercase">Employee</h3>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="<?php echo base_url();?>Employee/ListAll" class="nav-link nav-toggle">
+                                <i class="fa fa-map"></i>
+                                <span class="title">Track Employee</span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                     <!-- END SIDEBAR MENU -->

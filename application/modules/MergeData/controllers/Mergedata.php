@@ -37,10 +37,11 @@ class MergeData extends CI_Controller {
 	 */
 	public function MergeData($id)
 	{
-		// $date = strtotime(date('Y-m-d H:i:s'));
-		$date = strtotime('2016-08-10 00:00:00');
+		$date = strtotime(date('Y-m-d H:i:s'));
+		// $date = strtotime('2016-08-10 00:00:00');
 		$starttime = date('Y-m-d H:00:00',strtotime("-3 hour", $date));
-		$employeedata =$this->Mergedatamodel->GetEmployeeInformation($starttime);
+		$totime =  strtotime(date('Y-m-d H:59:59'));
+		$employeedata =$this->Mergedatamodel->GetEmployeeInformation($starttime, $totime);
 		if($employeedata->num_rows()>1)
 		{
 			$initlong ='';

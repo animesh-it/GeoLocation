@@ -33,16 +33,30 @@ class Geodata extends REST_Controller {
     }
 
     public function index_get(){
-
     }
 
     public function newGeoLocation_post(){
         $logdate = date('Y-m-d H:i:s');
         $logdata = $this->post('LogData');
-
+        $row = json_decode($logdata);
+        
+        $data['transactionlog']['action']                = ($row->action!='')?$row->action:'';
+        $data['transactionlog']['callerID']              = ($row->callerID!='')?$row->callerID:'';
+        $data['transactionlog']['carrier']               = ($row->carrier!='')?$row->carrier:'';
+        $data['transactionlog']['dateTime']              = ($row->dateTime!='')?$row->dateTime:'';
+        $data['transactionlog']['deviceID']              = ($row->deviceID!='')?$row->deviceID:'';
+        $data['transactionlog']['ipAddress']             = ($row->ipAddress!='')?$row->ipAddress:'';
+        $data['transactionlog']['latitude']              = ($row->latitude!='')?$row->latitude:'';
+        $data['transactionlog']['longitude']             = ($row->longitude!='')?$row->longitude:'';
+        $data['transactionlog']['locationAccessCode']    = ($row->locationAccessCode!='')?$row->locationAccessCode:'';
+        $data['transactionlog']['mobileCountryCode']     = ($row->mobileCountryCode!='')?$row->mobileCountryCode:'';
+        $data['transactionlog']['mobileNetworkCode']     = ($row->mobileNetworkCode!='')?$row->mobileNetworkCode:'';
+        $data['transactionlog']['signalStrength']        = ($row->signalStrength!='')?$row->signalStrength:'';
+        $data['transactionlog']['userID']                = ($row->userID!='')?$row->userID:'';
+        
         // Insert in the transaction table
-        $data['transactionlog']['DateOfLog'] = $logdate;
-        $data['transactionlog']['LogData'] = $logdata;
+        // $data['transactionlog']['DateOfLog'] = $logdate;
+        // $data['transactionlog']['LogData'] = $logdata; removed and divided to multiple rows
         $this->restservermodel->addLogInformation($data['transactionlog']);
         $data['transactionresponse']['CODE']=0;
         $data['transactionresponse']['MSG']='Successfully added the log info';

@@ -38,7 +38,7 @@ class Employee extends CI_Controller {
 				$data['employeeID']	  = $employeeID;
 				$query = $this->Employeemodel->ListEmployee();
 				$data['selectedemployeedropdown'] = $this->GetDropDown($query,'ID', 'Name',$employeeID);
-				$data['employeedata'] =$this->Employeemodel->GetEmployeeInformation($fromdate, $todate);
+				$data['employeedata'] =$this->Employeemodel->GetEmployeeInformation($fromdate, $todate, $employeeID);
 				$data['fromdate']	= $fromdate;
 				$data['todate']		= $todate;
 				$this->load->library('googlemaps')	;
@@ -48,14 +48,15 @@ class Employee extends CI_Controller {
 				$count = 1;
 				$polyline['points'] = array();
 				foreach($data['employeedata']->result() as $row){
-                    $mapdata = $row->LogData; 
-                    $mapdatas = json_decode($mapdata);
-                    if($mapdatas->userID == $employeeID)
+                    // $mapdata = $row->LogData; 
+                    // $mapdatas = json_decode($mapdata);
+                    //echo "<pre>"; var_dump($row);die();
+                    if($row->userID == $employeeID)
                     {
-                    	if(isset($mapdatas->latitude)){
+                    	if(isset($row->latitude)){
 							$marker = array();
-							$lat=$mapdatas->latitude;
-							$long=$mapdatas->longitude;
+							$lat=$row->latitude;
+							$long=$row->longitude;
 							$marker['position'] = $lat.','. $long;
 							$marker['infowindow_content'] = $count++;
 							$this->googlemaps->add_marker($marker);

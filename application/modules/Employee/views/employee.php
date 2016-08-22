@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-md-2">
                             <label></label>
-                                <button type="Submit" class="form-control btn btn-success" name="Submit" value="Submit">Go</button>
+                                <button type="Submit" class="form-control btn btn-success showMap" name="Submit" value="Submit">Go</button>
                             </div>
                         </div>
                         </form>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-2">
                             <label></label>
-                                <button type="Submit" class="form-control btn btn-success" name="Submit" value="Submit">Go</button>
+                                <button type="Submit" class="form-control btn btn-success showMap" name="Submit" value="Submit">Go</button>
                             </div>
                         </div>
                         </form>
@@ -121,22 +121,22 @@
                                         <?php 
                                             $count =1;
                                             foreach($employeedata->result() as $row){
-                                                $data = $row->LogData; 
-                                                $data = json_decode($data);
-                                                if($data->userID == $employeeID)
+                                                // $data = $row->LogData; 
+                                                // $data = json_decode($data);
+                                                if($row->userID == $employeeID)
                                                 {
                                         ?>
                                                 <tr class="odd gradeX">
                                                     <td><?php echo $count++;?></td>
-                                                    <td><?php echo (isset($data->callerID))?$data->callerID:'-';?></td>
-                                                    <td><?php echo (isset($data->carrier))?$data->carrier:'-';?></td>
-                                                    <td><?php echo (isset($data->deviceID))?$data->deviceID:'-';?></td>
-                                                    <td><?php echo (isset($data->ipAddress))?$data->ipAddress:'-';?></td>
-                                                    <td><?php echo (isset($data->latitude))?$data->latitude:'-';?></td>
-                                                    <td><?php echo (isset($data->longitude))?$data->longitude:'-';?></td>
-                                                    <td><?php echo (isset($data->locationAccessCode))?$data->locationAccessCode:'-';?></td>
-                                                    <td><?php echo (isset($data->macAddress))?$data->macAddress:'-';?></td>
-                                                    <td><?php echo $row->DateOfLog?></td>
+                                                    <td><?php echo (isset($row->callerID))?$row->callerID:'-';?></td>
+                                                    <td><?php echo (isset($row->carrier))?$row->carrier:'-';?></td>
+                                                    <td><?php echo (isset($row->deviceID))?$row->deviceID:'-';?></td>
+                                                    <td><?php echo (isset($row->ipAddress))?$row->ipAddress:'-';?></td>
+                                                    <td><?php echo (isset($row->latitude))?$row->latitude:'-';?></td>
+                                                    <td><?php echo (isset($row->longitude))?$row->longitude:'-';?></td>
+                                                    <td><?php echo (isset($row->locationAccessCode))?$row->locationAccessCode:'-';?></td>
+                                                    <td><?php echo (isset($row->macAddress))?$row->macAddress:'-';?></td>
+                                                    <td><?php echo $row->dateTime?></td>
                                                 </tr>
                                         <?php
                                                 }

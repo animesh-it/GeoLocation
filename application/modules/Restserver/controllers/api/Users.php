@@ -57,7 +57,6 @@ class Users extends REST_Controller {
             $this->restservermodel->addUserLogInformation($data['userlog']);
 
             // Reply to the mobile app
-            $data['user']['UserID'] = $userinfo->row()->ID;
             $data['user']['AgentCode'] = $userinfo->row()->AgentCode;
             $data['user']['APIPassword'] = $userinfo->row()->APIPassword;
             $data['user']['SessionID'] = $sessionid;

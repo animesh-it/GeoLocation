@@ -19,6 +19,7 @@ class RestServerModel extends CI_Model{
     function addLogInformation($data)
     {
         $this->db->insert('geolog', $data);
+        return $this->db->insert_id();
     }
 
     function getTableListByTableName($table){
@@ -28,5 +29,23 @@ class RestServerModel extends CI_Model{
 
     function addCheckInOut($data){
         $this->db->insert('check_log', $data);
+    }
+    function getEmployeeData($id){
+        $this->db->select('*');
+        $this->db->where('variant','1');
+        $this->db->where('userID', $id);
+        $this->db->order_by('dateTime', 'DESC');
+        $this->db->limit(1,0);
+        $query = $this->db->get('geolog');
+        return $query->row();
+    }
+    function mergeData($data)
+    {
+        $this->db->insert('identity_operational.geolog', $data);
+    }
+    function updateData($id, $data)
+    {
+        $this->db->where('ID', $id);
+        $this->db->update('geolog', $data);
     }
 }

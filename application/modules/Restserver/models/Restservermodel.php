@@ -34,6 +34,7 @@ class RestServerModel extends CI_Model{
         $this->db->select('*');
         $this->db->where('variant','1');
         $this->db->where('userID', $id);
+        $this->db->where('action','IN');
         $this->db->order_by('dateTime', 'DESC');
         $this->db->limit(1,0);
         $query = $this->db->get('geolog');

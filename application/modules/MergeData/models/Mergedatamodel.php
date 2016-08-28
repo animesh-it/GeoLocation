@@ -19,9 +19,9 @@ class MergedataModel extends CI_Model{
 		return $this->db->get('users');
 	}
 
-	function GetEmployeeInformation($fromdate)
+	function GetEmployeeInformation($fromdate,$todate,$id)
 	{
-		return $this->db->query('SELECT * FROM geolog WHERE DateOfLog>= "'.date('Y-m-d H:i:s',strtotime($fromdate)).'"  AND DateOfLog>= "'.date('Y-m-d H:i:s',strtotime($fromdate)).'"');
+		return $this->db->query('SELECT * FROM geolog WHERE DateOfLog>= "'.date('Y-m-d H:i:s',strtotime($fromdate)).'"  AND DateOfLog<= "'.date('Y-m-d H:i:s',strtotime($todate)).'" AND latitude!="" AND longitude!="" AND userID ='.$id);
 	}
 	function AddToMergeDB($data)
 	{

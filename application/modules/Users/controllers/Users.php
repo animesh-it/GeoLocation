@@ -56,8 +56,8 @@ class Users extends CI_Controller {
 				$user['values']['Name'] = $this->input->post('Name');
 				$user['values']['Email'] = $this->input->post('Email');
 				$user['values']['DeviceID'] = $this->input->post('DeviceID');
-				$user['values']['APIPassword'] = $this->input->post('APIPassword');
-				$user['values']['GeoCode'] = $this->input->post('GeoCode');
+				// $user['values']['APIPassword'] = $this->input->post('APIPassword');
+				// $user['values']['GeoCode'] = $this->input->post('GeoCode');
 				$user['values']['Username'] = $this->input->post('Username');
 				$user['values']['Password'] = md5($this->input->post('Password'));
 				$user['values']['CreatedAt'] = date('Y-m-d H:i:s');
@@ -85,8 +85,8 @@ class Users extends CI_Controller {
 				$user['values']['Name'] = $this->input->post('Name');
 				$user['values']['Email'] = $this->input->post('Email');
 				$user['values']['DeviceID'] = $this->input->post('DeviceID');
-				$user['values']['APIPassword'] = $this->input->post('APIPassword');
-				$user['values']['GeoCode'] = $this->input->post('GeoCode');
+				// $user['values']['APIPassword'] = $this->input->post('APIPassword');
+				// $user['values']['GeoCode'] = $this->input->post('GeoCode');
 				$user['values']['Username'] = $this->input->post('Username');
 				if($this->input->post('Password') != '')
 					$user['values']['Password'] = md5($this->input->post('Password'));

@@ -58,7 +58,9 @@ class Geodata extends REST_Controller {
         // $data['transactionlog']['LogData'] = $logdata; removed and divided to multiple rows
         $data['transactionlog']['DateOfLog'] = $logdate;
         $id = $this->restservermodel->addLogInformation($data['transactionlog']);
-        $this->mergeData($id, $data['transactionlog']['userID'], $data);
+        if($data['transactionlog']['action']== "IN" && $data['transactionlog']['latitude']!=''){
+            $this->mergeData($id, $data['transactionlog']['userID'], $data);
+        }
         $data['transactionresponse']['CODE']=0;
         $data['transactionresponse']['MSG']='Successfully added the log info';
         $this->response($data['transactionresponse']);
@@ -67,45 +69,48 @@ class Geodata extends REST_Controller {
     {
         $initlong = '';
         $initlat = '';
+        $time ='';
         $earthRadius = 6371000;
         foreach($log as $logData){
             $initlong   = $logData['longitude'];
             $initlat    = $logData['latitude'];
+            $time       = date('Y-m-d',$logData['dateTime']);
         }
+        if($initlat!=''){
+            $query      = $this->restservermodel->getEmployeeData($userID);
+            $latFrom    = deg2rad($initlat);
+            $longFrom   = deg2rad($initlong);
+            $oldTime    = date('Y-m-d', $query->dateTime);
+            $latTo      = deg2rad($query->latitude);
+            $longTo     = deg2rad($query->longitude);
+            
+            $latDelta   = $latTo - $latFrom;
+            $longDelta  = $longTo - $longFrom;
 
-        $query      = $this->restservermodel->getEmployeeData($userID);
-        $latFrom    = deg2rad($initlat);
-        $longFrom   = deg2rad($initlong);
-
-        $latTo      = deg2rad($query->latitude);
-        $longTo     = deg2rad($query->longitude);
-        
-        $latDelta   = $latTo - $latFrom;
-        $longDelta  = $longTo - $longFrom;
-
-        $angle      = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($longDelta / 2), 2)));
-        $distance   = $angle * $earthRadius;
-        if($distance > 20)
-        {
-            foreach($log as $logData){
-                $data['transactionlog']['action']                = $logData['action'];
-                $data['transactionlog']['callerID']              = $logData['callerID'];
-                $data['transactionlog']['carrier']               = $logData['carrier'];
-                $data['transactionlog']['dateTime']              = $logData['dateTime'];
-                $data['transactionlog']['deviceID']              = $logData['deviceID'];
-                $data['transactionlog']['ipAddress']             = $logData['ipAddress'];
-                $data['transactionlog']['latitude']              = $logData['latitude'];
-                $data['transactionlog']['longitude']             = $logData['longitude'];
-                $data['transactionlog']['locationAccessCode']    = $logData['locationAccessCode'];
-                $data['transactionlog']['mobileCountryCode']     = $logData['mobileCountryCode'];
-                $data['transactionlog']['mobileNetworkCode']     = $logData['mobileNetworkCode'];
-                $data['transactionlog']['signalStrength']        = $logData['signalStrength'];
-                $data['transactionlog']['userID']                = $logData['userID'];
+            $angle      = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) + cos($latFrom) * cos($latTo) * pow(sin($longDelta / 2), 2)));
+            $distance   = $angle * $earthRadius;
+            if($distance > 20 || $time == $oldTime)
+            {
+                foreach($log as $logData){
+                    $data['transactionlog']['action']                = $logData['action'];
+                    $data['transactionlog']['callerID']              = $logData['callerID'];
+                    $data['transactionlog']['carrier']               = $logData['carrier'];
+                    $data['transactionlog']['dateTime']              = $logData['dateTime'];
+                    $data['transactionlog']['deviceID']              = $logData['deviceID'];
+                    $data['transactionlog']['ipAddress']             = $logData['ipAddress'];
+                    $data['transactionlog']['latitude']              = $logData['latitude'];
+                    $data['transactionlog']['longitude']             = $logData['longitude'];
+                    $data['transactionlog']['locationAccessCode']    = $logData['locationAccessCode'];
+                    $data['transactionlog']['mobileCountryCode']     = $logData['mobileCountryCode'];
+                    $data['transactionlog']['mobileNetworkCode']     = $logData['mobileNetworkCode'];
+                    $data['transactionlog']['signalStrength']        = $logData['signalStrength'];
+                    $data['transactionlog']['userID']                = $logData['userID'];
+                }
+               
+                $this->restservermodel->mergeData($data['transactionlog']);
+                $updateData['variant'] = '1';
+                $this->restservermodel->updateData($id, $updateData);
             }
-           
-            $this->restservermodel->mergeData($data['transactionlog']);
-            $updateData['variant'] = '1';
-            $this->restservermodel->updateData($id, $updateData);
         }
 
     }

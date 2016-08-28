@@ -36,19 +36,27 @@
                             <div class="col-md-4">
                                 <div class="col-sm-8">
                                     <label for="Employee">Employee</label>
-                                    <select name="Employee" id="Employee" class="form-control select2" >
+                                    <select name="Employee" id="Employee" class="form-control select2">
                                         <?php echo $employeedropdown?>           
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <label for="FromDate">From</label>
-                                    <input type="readonly" name="FromDate" id="FromDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" value="<?php echo date('Y-m').'-01'?>"/>
+                                    <input type="text" name="FromDate" id="FromDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" readonly value="<?php echo date('Y-m').'-01'?>"/>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <label for="ToDate">To</label>
-                                    <input type="readonly" name="ToDate" id="ToDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" value="<?php echo date('Y-m-d');?>"/>
+                                    <input type="text" name="ToDate" id="ToDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" readonly value="<?php echo date('Y-m-d');?>"/>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="Direction">Direction</label>
+                                    <select name="directionOnly" class="form-control">
+                                        <option value="true">Direction</option>
+                                        <option value="false">Points</option>
+                                        <option value="both">Both</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -73,13 +81,21 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <label for="FromDate">From</label>
-                                    <input type="readonly" name="FromDate" id="FromDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" value="<?php echo $fromdate?>"/>
+                                    <input type="text" name="FromDate" id="FromDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" readonly value="<?php echo $fromdate?>"/>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-4">
                                     <label for="ToDate">To</label>
-                                    <input type="readonly" name="ToDate" id="ToDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" value="<?php echo $todate?>"/>
+                                    <input type="text" name="ToDate" id="ToDate" data-date-format="yyyy-mm-dd" class="datepicker form-control" readonly value="<?php echo $todate?>"/>
+                                </div>
+                                 <div class="col-sm-4">
+                                    <label for="Direction">Direction</label>
+                                    <select name="directionOnly" class="form-control">
+                                        <option value="true">Direction</option>
+                                        <option value="false">Points</option>
+                                        <option value="both">Both</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-2">

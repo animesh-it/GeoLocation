@@ -37,11 +37,9 @@
                         <table class="table table-striped table-bordered table-hover table-checkable order-column" id="UsersListTable">
                                         <thead>
                                             <tr>
-                                                <th> Agent Code </th>
+                                                <th width="8%"> Agent Code </th>
                                                 <th> Name </th>
                                                 <th> DeviceID </th>
-                                                <th> API Password </th>
-                                                <th> Geo Code </th>
                                                 <th> Username </th>
                                                 <th width="5%"> Is Active </th>
                                                 <th width="10%"> Actions </th>
@@ -56,8 +54,6 @@
                                                 <td><?php echo $user->AgentCode;?></td>
                                                 <td><?php echo $user->Name;?></td>
                                                 <td><?php echo $user->DeviceID;?></td>
-                                                <td><?php echo $user->APIPassword;?></td>
-                                                <td><?php echo $user->GeoCode;?></td>
                                                 <td><?php echo $user->Username;?></td>
                                                 <td><?php echo $user->IsActive;?></td>
                                                 <td><a href="<?php echo base_url();?>Users/Edit/<?php echo $user->ID;?>" class="btn green btn-sm" title="Edit"><i class="fa fa-edit"></i></a> <a href="" class="btn red btn-sm" title="Delete"><i class="fa fa-remove"></i></a></td>    

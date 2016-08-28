@@ -67,22 +67,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">API Password
-                                            <span class="required"> * </span>
-                                        </label>
-                                        <div class="col-md-6">
-                                            <input type="text" name="APIPassword" class="form-control" placeholder="Enter API Password" value="<?php echo $user->APIPassword;?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Geo Code
-                                            <span class="required"> * </span>
-                                        </label>
-                                        <div class="col-md-6">
-                                            <input type="text" name="GeoCode" class="form-control" placeholder="Enter Geo Code" value="<?php echo $user->GeoCode;?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-md-3 control-label">Username
                                             <span class="required"> * </span>
                                         </label>
